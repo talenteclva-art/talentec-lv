@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talentec LVA - Talento + Tecnología</title>
+<style>
+:root{
+  --purple:#5b2f8f;
+  --purple2:#814fb8;
+  --dark:#21162f;
+  --ink:#202536;
+  --muted:#6b7280;
+  --bg:#f7f7fb;
+  --white:#fff;
+  --line:#e6e7ee;
+  --soft:#f2eef8;
+  --green:#23875d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+.wrap{max-width:1080px;margin:auto;padding:0 18px}
+header{
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  color:#fff;padding:18px 0;position:sticky;top:0;z-index:10;
+  box-shadow:0 4px 18px rgba(40,30,70,.15)
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:28px;font-weight:800;letter-spacing:-.3px}
+.logo span{font-weight:500;opacity:.92}
+.navnote{font-size:13px;background:rgba(255,255,255,.16);padding:8px 12px;border-radius:999px}
+.hero{padding:52px 0 26px;text-align:center}
+.eyebrow{color:var(--purple);font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.6px}
+.hero h1{font-size:40px;line-height:1.08;margin:10px auto 14px;max-width:860px;overflow-wrap:anywhere}
+.hero p{font-size:18px;line-height:1.6;color:var(--muted);max-width:780px;margin:0 auto}
+.brandline{font-weight:700;color:var(--purple);margin-top:16px}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:28px 0}
+.card,.role,.panel,.mini,.step,.job{
+  background:#fff;border:1px solid var(--line);box-shadow:0 9px 28px rgba(42,33,66,.07)
+}
+.role{border-radius:20px;padding:25px;min-width:0}
+.role h2{margin:7px 0 8px;font-size:26px;overflow-wrap:anywhere}
+.role p{color:var(--muted);line-height:1.55}
+.role ul{padding-left:20px;line-height:1.7;color:#4c5261}
+.btn{
+  border:0;cursor:pointer;border-radius:12px;padding:13px 18px;font-size:15px;
+  font-weight:800;background:var(--purple);color:#fff;max-width:100%;white-space:normal
+}
+.btn.dark{background:#22283a}
+.section{padding:18px 0 48px}
+.section-title{text-align:center;font-size:31px;margin:0 0 10px;overflow-wrap:anywhere}
+.section-lead{text-align:center;color:var(--muted);max-width:760px;margin:0 auto 26px;line-height:1.55}
+.panel{display:none;border-radius:20px;padding:24px;min-width:0}
+.panel h2{margin-top:0;overflow-wrap:anywhere}
+label{display:block;font-weight:800;margin:14px 0 6px}
+input,textarea,select{
+  width:100%;max-width:100%;padding:12px;border:1px solid #d8dbe5;border-radius:10px;
+  font-size:15px;font-family:inherit
+}
+textarea{min-height:95px;resize:vertical}
+.result{
+  display:none;margin-top:18px;background:var(--soft);border-left:4px solid var(--purple);
+  padding:16px;border-radius:10px;white-space:pre-wrap;overflow-wrap:anywhere
+}
+.jobs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.job{border-radius:16px;padding:18px;box-shadow:none;min-width:0}
+.job h3{margin:0 0 5px;font-size:20px;overflow-wrap:anywhere}
+.meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+.job p{color:#4c5261;line-height:1.48}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.chip{font-size:12px;background:#f0edf5;color:var(--purple);border-radius:999px;padding:6px 9px;overflow-wrap:anywhere}
+.applybox{display:none;margin-top:22px;border-top:1px solid var(--line);padding-top:20px}
+.selected{background:#f6f2fa;border:1px solid #e2d7ee;border-radius:14px;padding:15px;margin-bottom:16px;overflow-wrap:anywhere}
+.selected strong{display:block;margin-bottom:4px}
+.info{background:#fafafd;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px;overflow-wrap:anywhere}
+.info h4{margin:0 0 8px}
+.filebox{border:2px dashed #c9c5d4;border-radius:14px;padding:22px;text-align:center;background:#faf9fc}
+.filebox input{border:none;background:transparent}
+.filename{font-size:13px;color:var(--green);font-weight:800;margin-top:8px;overflow-wrap:anywhere}
+.small{font-size:12px;color:#7a8190;line-height:1.45}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}
+.step{border-radius:16px;padding:20px;text-align:center;box-shadow:none;min-width:0;overflow-wrap:anywhere}
+.step strong{display:block;font-size:23px;color:var(--purple);margin-bottom:8px}
+.difference{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mini{border-radius:17px;padding:21px;box-shadow:none;min-width:0}
+.mini h4{font-size:20px;margin:0 0 9px}
+.mini p{margin:0;color:var(--muted);line-height:1.55}
+.claim{
+  margin:10px 0 48px;background:var(--dark);color:#fff;border-radius:22px;
+  padding:30px;text-align:center
+}
+.claim h3{font-size:30px;margin:0 0 9px}
+.claim p{max-width:760px;margin:0 auto;color:#ded7e7;line-height:1.55;font-size:17px}
+.claim .sub{font-size:14px;margin-top:10px;color:#cfc2df}
+footer{text-align:center;padding:24px 16px;color:#7a8190;font-size:13px}
+@media(max-width:760px){
+ .wrap{padding:0 14px}
+ .hero{padding:36px 0 20px}
+ .hero h1{font-size:30px;line-height:1.15}
+ .hero p{font-size:16px}
+ .role-grid,.jobs,.difference{grid-template-columns:1fr}
+ .steps{grid-template-columns:1fr 1fr}
+ .navnote{display:none}
+ .role,.panel{padding:18px}
+ .section-title{font-size:27px}
+ .claim{padding:24px 18px}
+}
+@media(max-width:420px){
+ .logo{font-size:24px}
+ .hero h1{font-size:27px}
+ .steps{grid-template-columns:1fr}
+ .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Talentec <span>LVA</span></div>
+    <div class="navnote">Talento + Tecnología</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Talento + Tecnología</div>
+    <h1>Empresas encuentran talento. Personas encuentran oportunidades.</h1>
+    <p>Talentec LVA conecta a empresas y candidatos en una experiencia más simple, organizada y profesional durante todo el proceso de selección.</p>
+    <div class="brandline">Una plataforma · dos soluciones</div>
+  </section>
+
+  <section class="role-grid">
+    <article class="role">
+      <div style="font-size:35px">🏢</div>
+      <h2>Soy empresa</h2>
+      <p>Necesito encontrar y gestionar talento.</p>
+      <ul>
+        <li>Publicar vacantes</li>
+        <li>Definir requisitos</li>
+        <li>Recibir hojas de vida</li>
+        <li>Organizar candidatos</li>
+        <li>Preparar entrevistas</li>
+      </ul>
+      <button class="btn" onclick="showPanel('empresa')">Publicar una vacante</button>
+    </article>
+
+    <article class="role">
+      <div style="font-size:35px">👤</div>
+      <h2>Busco empleo</h2>
+      <p>Quiero encontrar oportunidades y postular fácilmente.</p>
+      <ul>
+        <li>Explorar vacantes</li>
+        <li>Conocer requisitos</li>
+        <li>Subir mi hoja de vida</li>
+        <li>Postular en pocos pasos</li>
+        <li>Consultar mis procesos</li>
+      </ul>
+      <button class="btn dark" onclick="showPanel('candidato')">Ver vacantes</button>
+    </article>
+  </section>
+
+  <section class="section">
+    <div id="empresa" class="panel">
+      <h2>Publicar una vacante</h2>
+      <p style="color:var(--muted)">La empresa registra la información que verá el candidato.</p>
+
+      <label>Cargo</label>
+      <input id="ecargo" placeholder="Ej. Analista de Selección">
+
+      <label>Ciudad</label>
+      <input id="eciudad" placeholder="Ej. Guayaquil">
+
+      <label>Modalidad</label>
+      <select id="emodalidad">
+        <option>Presencial</option>
+        <option>Híbrida</option>
+        <option>Remota</option>
+      </select>
+
+      <label>Requisitos de la vacante</label>
+      <textarea id="erequisitos" placeholder="Ej. Psicología Organizacional, 2 años de experiencia, Excel intermedio..."></textarea>
+
+      <label>Funciones principales</label>
+      <textarea id="efunciones" placeholder="Describe brevemente las responsabilidades del cargo..."></textarea>
+
+      <button class="btn" style="margin-top:16px" onclick="publicarVacante()">Crear vacante</button>
+      <div id="resultadoEmpresa" class="result"></div>
+    </div>
+
+    <div id="candidato" class="panel">
+      <h2>Vacantes disponibles</h2>
+      <p style="color:var(--muted)">El candidato solo elige la vacante. Los requisitos son definidos previamente por la empresa.</p>
+
+      <div class="jobs">
+        <div class="job">
+          <h3>Analista de Selección</h3>
+          <div class="meta">Guayaquil · Presencial</div>
+          <div class="chips">
+            <span class="chip">2 años de experiencia</span>
+            <span class="chip">Excel intermedio</span>
+            <span class="chip">Psicología Organizacional</span>
+          </div>
+          <p>Apoyo en reclutamiento, entrevistas, filtros y seguimiento de procesos de selección.</p>
+          <button class="btn dark" onclick="seleccionarVacante('Analista de Selección','Guayaquil · Presencial','Psicología Organizacional; 2 años de experiencia; Excel intermedio; disponibilidad inmediata')">Postular</button>
+        </div>
+
+        <div class="job">
+          <h3>Coordinador/a de Talento Humano</h3>
+          <div class="meta">Durán · Híbrida</div>
+          <div class="chips">
+            <span class="chip">3 años de experiencia</span>
+            <span class="chip">KPIs</span>
+            <span class="chip">Administración de personal</span>
+          </div>
+          <p>Gestión de indicadores, movimientos de personal y soporte integral de Talento Humano.</p>
+          <button class="btn dark" onclick="seleccionarVacante('Coordinador/a de Talento Humano','Durán · Híbrida','3 años de experiencia; administración de personal; KPIs; Excel intermedio-avanzado')">Postular</button>
+        </div>
+      </div>
+
+      <div id="applybox" class="applybox">
+        <h2>Enviar postulación</h2>
+
+        <div class="selected">
+          <strong id="vacanteNombre">Vacante seleccionada</strong>
+          <span id="vacanteMeta"></span>
+        </div>
+
+        <div class="info">
+          <h4>Requisitos definidos por la empresa</h4>
+          <div id="vacanteReq"></div>
+        </div>
+
+        <label>Nombre completo</label>
+        <input id="cnombre" placeholder="Tu nombre y apellido">
+
+        <label>Correo electrónico</label>
+        <input id="ccorreo" type="email" placeholder="correo@ejemplo.com">
+
+        <label>Teléfono</label>
+        <input id="ctelefono" placeholder="Ej. 09XXXXXXXX">
+
+        <label>Hoja de vida</label>
+        <div class="filebox">
+          <strong>📄 Sube tu CV</strong>
+          <p class="small">PDF, DOC o DOCX.</p>
+          <input id="cvfile" type="file" accept=".pdf,.doc,.docx" onchange="mostrarArchivo()">
+          <div id="filename" class="filename"></div>
+        </div>
+
+        <label>LinkedIn (opcional)</label>
+        <input id="clinkedin" placeholder="Enlace a tu perfil">
+
+        <label>Mensaje al reclutador (opcional)</label>
+        <textarea id="cmensaje" placeholder="Escribe un mensaje breve si deseas añadir información adicional."></textarea>
+
+        <button class="btn dark" style="margin-top:16px" onclick="enviarPostulacion()">Enviar postulación</button>
+        <div id="resultadoCandidato" class="result"></div>
+
+        <p class="small">La tecnología puede apoyar la organización y análisis del proceso, pero la decisión de contratación corresponde a una persona.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Cómo funciona Talentec LVA</h2>
+    <p class="section-lead">Una experiencia simple para que ambos lados del proceso de selección tengan mejores herramientas.</p>
+
+    <div class="steps">
+      <div class="step"><strong>1</strong>Describe</div>
+      <div class="step"><strong>2</strong>Organiza</div>
+      <div class="step"><strong>3</strong>Analiza</div>
+      <div class="step"><strong>4</strong>Prepara</div>
+      <div class="step"><strong>5</strong>Conecta</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">¿Qué hace diferente a Talentec LVA?</h2>
+    <p class="section-lead">No es solo una bolsa de empleo. Es una herramienta que acompaña a empresas y candidatos antes, durante y después de la postulación.</p>
+
+    <div class="difference">
+      <div class="mini">
+        <h4>Para empresas</h4>
+        <p>Reduce trabajo operativo y ayuda a organizar mejor cada proceso de selección.</p>
+      </div>
+
+      <div class="mini">
+        <h4>Para candidatos</h4>
+        <p>Facilita la postulación, la presentación profesional y el seguimiento de oportunidades.</p>
+      </div>
+
+      <div class="mini">
+        <h4>Con respaldo LVA</h4>
+        <p>Integra tecnología con una visión profesional de Talento Humano.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="claim">
+    <h3>Talentec LVA</h3>
+    <p>Empresas encuentran talento. Personas encuentran oportunidades. La tecnología hace el proceso más simple.</p>
+    <div class="sub">Talento + Tecnología</div>
+  </section>
+</main>
+
+<footer>Talentec LVA · Plataforma de talento y selección</footer>
+
+<script>
+function showPanel(id){
+  document.getElementById('empresa').style.display='none';
+  document.getElementById('candidato').style.display='none';
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function publicarVacante(){
+  const cargo=document.getElementById('ecargo').value||'Cargo por definir';
+  const ciudad=document.getElementById('eciudad').value||'Ciudad por definir';
+  const mod=document.getElementById('emodalidad').value;
+  const req=document.getElementById('erequisitos').value||'Requisitos pendientes';
+  const fun=document.getElementById('efunciones').value||'Funciones pendientes';
+  const r=document.getElementById('resultadoEmpresa');
+  r.textContent=`VACANTE CREADA
+
+Cargo: ${cargo}
+Ubicación: ${ciudad}
+Modalidad: ${mod}
+
+Requisitos:
+${req}
+
+Funciones:
+${fun}
+
+En la versión final, esta vacante aparecerá automáticamente para los candidatos.`;
+  r.style.display='block';
+}
+function seleccionarVacante(nombre,meta,req){
+  document.getElementById('vacanteNombre').textContent=nombre;
+  document.getElementById('vacanteMeta').textContent=meta;
+  document.getElementById('vacanteReq').innerHTML=req.split(';').map(x=>'• '+x.trim()).join('<br>');
+  const box=document.getElementById('applybox');
+  box.style.display='block';
+  box.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function mostrarArchivo(){
+  const f=document.getElementById('cvfile').files[0];
+  document.getElementById('filename').textContent=f?'✓ '+f.name:'';
+}
+function enviarPostulacion(){
+  const nombre=document.getElementById('cnombre').value.trim();
+  const correo=document.getElementById('ccorreo').value.trim();
+  const archivo=document.getElementById('cvfile').files[0];
+  const r=document.getElementById('resultadoCandidato');
+
+  if(!nombre||!correo||!archivo){
+    r.textContent='Completa tu nombre, correo y sube tu hoja de vida para continuar.';
+    r.style.display='block';
+    return;
+  }
+  const vacante=document.getElementById('vacanteNombre').textContent;
+  r.textContent=`POSTULACIÓN LISTA
+
+${nombre}, tu postulación para "${vacante}" fue preparada correctamente.
+
+CV adjunto: ${archivo.name}
+
+En la versión final:
+• Talentec LVA registrará tu postulación.
+• La empresa recibirá tu perfil.
+• Podrás consultar el estado del proceso desde tu cuenta.`;
+  r.style.display='block';
+}
+</script>
+
+</body>
+</html>
